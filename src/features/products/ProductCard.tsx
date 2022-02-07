@@ -9,6 +9,8 @@ import { Product } from '../../interfaces';
 export const ProductCard = (product: Product): JSX.Element => {
     const dispatch = useDispatch()
 
+
+
     return (<div>
 
 
@@ -22,7 +24,7 @@ export const ProductCard = (product: Product): JSX.Element => {
             </div>
             <div className="mt-4 flex justify-between">
                 <div>
-                            {product.name}
+                            {product.category_id}
                 </div>
                 <p className="mt-1 text-sm text-gray-500">{product.id}</p>
                 
@@ -39,3 +41,4 @@ export const ProductCard = (product: Product): JSX.Element => {
     </div>)
 
 };
+

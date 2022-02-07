@@ -19,18 +19,22 @@ export const productListSlice = createSlice({
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
+    resetProductList: (state) => {
+      return initialState
+  },
   },
   extraReducers: (builder) => {
     builder
     .addCase(fetchProducts.fulfilled, (state, action) => {
         if (!!action.payload)
-          state.productsList = action.payload;
+          state.productsList = [...state.productsList, ...action.payload];
       })
   },
 });
 
 
 export default productListSlice.reducer
+export const {  resetProductList } = productListSlice.actions
 
 
 export const fetchProducts = createAsyncThunk(

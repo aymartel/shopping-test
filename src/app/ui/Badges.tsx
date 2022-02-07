@@ -1,15 +1,21 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Category } from "../../interfaces";
-import { useDispatch } from 'react-redux';
-import { fetchProducts } from '../../features/products/productListSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProducts, resetProductList } from '../../features/products/productListSlice';
+import { RootState } from '../store';
 const CategoryURL = `https://test2.sionic.ru/api/Categories?sort=["name","ASC"]&range=[0,24]`;
 
 export default function Badges() {
   const [categories, setCategories] = useState([]);
   const dispatch = useDispatch()
   const [catActiveId, setCatActive] = useState(-1);
-  
+
+  const productsList = useSelector((state: RootState) => state.products.productsList);
+  const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(0);
+  const hasMoreData = productsList.length < 20;
+
   useEffect(() => {
     axios.get(CategoryURL).then((response) => {
       setCategories(response.data);
@@ -27,6 +33,7 @@ export default function Badges() {
         <button key={category.id}
           onClick={
             () => {
+              dispatch(resetProductList())
               dispatch(
                 fetchProducts(`https://test2.sionic.ru/api/Products?sort=["name","ASC"]&range=[0,24]&filter={"category_id":${category.id}}`));
               setCatActive(category.id)
