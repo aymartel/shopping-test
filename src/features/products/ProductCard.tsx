@@ -11,7 +11,6 @@ export const ProductCard = (product: Product): JSX.Element => {
 
     return (<div>
 
-
         <div key={product.id} className="group relative">
             <div className="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
                 <img
@@ -22,7 +21,7 @@ export const ProductCard = (product: Product): JSX.Element => {
             </div>
             <div className="mt-4 flex justify-between">
                 <div>
-                            {product.name}
+                <h1>{product.category_id}</h1> 
                 </div>
                 <p className="mt-1 text-sm text-gray-500">{product.id}</p>
                 
